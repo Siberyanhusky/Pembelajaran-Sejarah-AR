@@ -1,133 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Mari Mengenali Peninggalan Sejarah Di Indonesia</title>
-  <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AR Edukasi Sejarah</title>
+
+  <!-- AR.js -->
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+
+  <!-- Pop-Up Style -->
   <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-    h1 {
-      position: absolute;
-      top: 10px;
-      width: 100%;
-      text-align: center;
+    body { margin: 0; overflow: hidden; font-family: sans-serif; }
+
+    #popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
       color: white;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 10px;
-      font-family: Arial, sans-serif;
-      z-index: 1;
     }
-    #resetCamera {
-      position: absolute;
-      top: 50px;
-      left: 10px;
-      z-index: 2;
+    #popup-content {
+      background: #222;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 420px;
+      text-align: center;
+      line-height: 1.5;
+    }
+    #popup button {
       padding: 10px 20px;
-      background: #fff;
+      margin-top: 20px;
       border: none;
-      cursor: pointer;
-      font-family: Arial, sans-serif;
-    }
-    /* Pastikan scene mengisi layar penuh */
-    a-scene {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    #loading {
-      position: absolute;
-      top: 10px;
-      width: 100%;
-      text-align: center;
+      border-radius: 8px;
+      background: #4CAF50;
       color: white;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 10px;
-      font-family: Arial, sans-serif;
-      z-index: 1;
+      font-size: 16px;
+      cursor: pointer;
     }
   </style>
 </head>
-<body>
-<h1>Mari Mengenali Peninggalan Sejarah Di Indonesia</h1>
-<button id="resetCamera">Reset Kamera</button>
-<div id="loading">Memuat AR...</div>
 
-<a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
-  <!-- Marker dan model sesuai file awal -->
-  <a-marker type='pattern' url='Arca Buddha.patt'>
-    <a-entity gltf-model="Arca Buddha.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
+<body>
+
+<!-- POPUP -->
+<div id="popup">
+  <div id="popup-content">
+    <h2 id="popup-title"></h2>
+    <p id="popup-text"></p>
+    <button onclick="closePopup()">Lihat 3D Model</button>
+  </div>
+</div>
+
+<!-- AR SCENE -->
+<a-scene
+  embedded
+  arjs="sourceType: webcam; debugUIEnabled: false;"
+  vr-mode-ui="enabled: false">
+
+  <!-- Container 3D -->
+  <a-entity id="model-container" position="0 0 0" scale="0 0 0"></a-entity>
+
+  <!-- MARKERS (10 PRASETEL MAPPING) -->
   
-  <a-marker type='pattern' url='Borobudur.patt'>
-    <a-entity gltf-model="Borobudur.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
-  
-  <a-marker type='pattern' url='Dewa Brahma.patt'>
-    <a-entity gltf-model="Dewa Brahma.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
-  
-  <a-marker type='pattern' url='Dolmen.patt'>
-    <a-entity gltf-model="Dolmen.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
-  
-  <a-marker type='pattern' url='Homo Erectus.patt'>
-    <a-entity gltf-model="Homo Erectus.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
-  
-  <a-marker type='pattern' url='Kjokkenmoddinger.patt'>
-    <a-entity gltf-model="Kjokkenmoddinger.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
-  
-  <a-marker type='pattern' url='Meganthropus Paleojavanicus.patt'>
-    <a-entity gltf-model="Meganthropus Paleojavanicus.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
-  
-  <a-marker type='pattern' url='Menhir.patt'>
-    <a-entity gltf-model="Menhir.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
-  
-  <a-marker type='pattern' url='Prambanan.patt'>
-    <a-entity gltf-model="Prambanan.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
-  
-  <a-marker type='pattern' url='Prasasti Ciaruteun.patt'>
-    <a-entity gltf-model="Prasasti Ciaruteun.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-  </a-marker>
-  
-  <!-- Kamera -->
+  <!-- 1. Prasasti Ciaruteun -->
+  <a-marker id="marker-ciaruteun" type="pattern" url="Prasasti Ciaruteun.patt"></a-marker>
+
+  <!-- 2. Dolmen -->
+  <a-marker id="marker-dolmen" type="pattern" url="Dolmen.patt"></a-marker>
+
+  <!-- 3. Arca Buddha -->
+  <a-marker id="marker-buddha" type="pattern" url="Arca Buddha.patt"></a-marker>
+
+  <!-- 4. Borobudur -->
+  <a-marker id="marker-borobudur" type="pattern" url="Borobudur.patt"></a-marker>
+
+  <!-- 5. Kjokkenmoddinger -->
+  <a-marker id="marker-kjokken" type="pattern" url="Kjokkenmoddinger.patt"></a-marker>
+
+  <!-- 6. Menhir -->
+  <a-marker id="marker-menhir" type="pattern" url="Menhir.patt"></a-marker>
+
+  <!-- 7. Prambanan -->
+  <a-marker id="marker-prambanan" type="pattern" url="Prambanan.patt"></a-marker>
+
+  <!-- 8. Dewa Brahma -->
+  <a-marker id="marker-brahma" type="pattern" url="Dewa Brahma.patt"></a-marker>
+
+  <!-- 9. Meganthropus -->
+  <a-marker id="marker-megan" type="pattern" url="Meganthropus Paleojavanicus.patt"></a-marker>
+
+  <!-- 10. Homo Erectus -->
+  <a-marker id="marker-erectus" type="pattern" url="Homo Erectus.patt"></a-marker>
+
   <a-entity camera></a-entity>
 </a-scene>
 
 <script>
-  // Fungsi meminta izin kamera
-  function requestCameraAccess() {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(stream => {
-        document.getElementById('loading').style.display = 'none';
-        // Setelah izin diambil, hentikan stream agar tidak tetap aktif
-        stream.getTracks().forEach(track => track.stop());
-      })
-      .catch(error => {
-        alert('Gagal mengakses kamera: ' + error.message);
-      });
+// ======================
+// MAPPING MATERI
+// ======================
+
+const materi = {
+  "marker-ciaruteun": {
+    title: "Prasasti Ciaruteun",
+    text: `Prasasti peninggalan Kerajaan Tarumanegara...`
+  },
+  "marker-dolmen": {
+    title: "Dolmen",
+    text: `Dolmen adalah meja batu besar dari zaman Megalitikum...`
+  },
+  "marker-buddha": {
+    title: "Arca Buddha (Dharmacakra Mudra)",
+    text: `Menggambarkan pemutaran roda Dharma dan ajaran pertama Buddha...`
+  },
+  "marker-borobudur": {
+    title: "Candi Borobudur",
+    text: `Candi Buddha terbesar di dunia, dibangun Dinasti Syailendra...`
+  },
+  "marker-kjokken": {
+    title: "Kjokkenmoddinger",
+    text: `Tumpukan kulit kerang masa Mesolitikum yang menunjukkan pola hidup semi nomaden...`
+  },
+  "marker-menhir": {
+    title: "Menhir",
+    text: `Batu tegak sakral sebagai simbol pemujaan leluhur pada masa Megalitikum...`
+  },
+  "marker-prambanan": {
+    title: "Candi Prambanan",
+    text: `Kompleks candi Hindu terbesar di Indonesia, didedikasikan untuk Trimurti...`
+  },
+  "marker-brahma": {
+    title: "Dewa Brahma",
+    text: `Dewa pencipta dalam ajaran Hindu, bagian dari Trimurti...`
+  },
+  "marker-megan": {
+    title: "Meganthropus Paleojavanicus",
+    text: `Manusia purba tertua di Indonesia dengan rahang besar dan kuat...`
+  },
+  "marker-erectus": {
+    title: "Homo Erectus",
+    text: `Manusia purba yang berjalan tegak dan telah menguasai api...`
   }
+};
 
-  // Panggil fungsi saat halaman dimuat
-  window.onload = function() {
-    requestCameraAccess();
-  };
+// ======================
+// MAPPING MODEL 3D (.glb)
+// ======================
 
-  // Reset posisi dan rotasi kamera
-  document.getElementById('resetCamera').addEventListener('click', function() {
-    var sceneEl = document.querySelector('a-scene');
-    var cameraEl = sceneEl.cameraEl;
-    // Reset posisi dan rotasi ke default
-    cameraEl.setAttribute('position', {x: 0, y: 1.6, z: 0});
-    cameraEl.setAttribute('rotation', {x: 0, y: 0, z: 0});
+const models = {
+  "marker-ciaruteun": "Prasasti Ciaruteun.glb",
+  "marker-dolmen": "Dolmen.glb",
+  "marker-buddha": "Arca buddha.glb",
+  "marker-borobudur": "Borobudur.glb",
+  "marker-kjokken": "Kjokkenmoddinger.glb",
+  "marker-menhir": "Menhir.glb",
+  "marker-prambanan": "Prambanan.glb",
+  "marker-brahma": "Dewa Brahma.glb",
+  "marker-megan": "Meganthropus Paleojavanicus.glb",
+  "marker-erectus": "Homo Erectus.glb"
+};
+
+// =============== POPUP HANDLER ===============
+
+let activeMarker = null;
+let popupShown = false;
+
+function showPopup(markerId) {
+  if (popupShown) return;
+  popupShown = true;
+  activeMarker = markerId;
+
+  document.getElementById("popup-title").innerText = materi[markerId].title;
+  document.getElementById("popup-text").innerText = materi[markerId].text;
+
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+  loadModel(activeMarker);
+}
+
+// =============== LOAD MODEL ===============
+
+function loadModel(markerId) {
+  const container = document.getElementById("model-container");
+  container.setAttribute("scale", "1 1 1");
+  container.setAttribute("gltf-model", models[markerId]);
+}
+
+// =============== EVENT MARKERS ===============
+
+function setupMarker(id) {
+  const marker = document.getElementById(id);
+
+  marker.addEventListener("markerFound", () => {
+    popupShown = false;
+    showPopup(id);
   });
+
+  marker.addEventListener("markerLost", () => {
+    document.getElementById("popup").style.display = "none";
+  });
+}
+
+// REGISTER ALL 10 MARKERS
+Object.keys(materi).forEach(id => setupMarker(id));
+
 </script>
+
 </body>
 </html>
