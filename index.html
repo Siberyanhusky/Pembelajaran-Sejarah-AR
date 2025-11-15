@@ -1,220 +1,143 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AR Edukasi Sejarah</title>
-
-  <!-- AR.js -->
-  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-
-  <!-- A-Frame -->
-  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-
-  <!-- Pop-Up Style -->
-  <style>
-    body { margin: 0; overflow: hidden; font-family: sans-serif; }
-
-    #popup {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.75);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      color: white;
-    }
-    #popup-content {
-      background: #222;
-      padding: 25px;
-      border-radius: 10px;
-      max-width: 420px;
-      text-align: center;
-      line-height: 1.5;
-    }
-    #popup button {
-      padding: 10px 20px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 8px;
-      background: #4CAF50;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+    <title>Pembelajaran Sejarah AR</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.4/aframe/build/aframe-ar.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body style="margin:0; overflow:hidden;">
 
-<!-- POPUP -->
-<div id="popup">
-  <div id="popup-content">
-    <h2 id="popup-title"></h2>
-    <p id="popup-text"></p>
-    <button onclick="closePopup()">Lihat 3D Model</button>
-  </div>
+<!-- ================ POPUP MATERI ================ -->
+<div id="popup" class="popup-hidden">
+    <div class="popup-content">
+        <h2 id="popup-title"></h2>
+        <p id="popup-text"></p>
+        <button id="btn-close">Lihat Model 3D</button>
+    </div>
 </div>
 
-<!-- AR SCENE -->
-<a-scene
-  embedded
-  arjs="sourceType: webcam; debugUIEnabled: false;"
-  vr-mode-ui="enabled: false">
+<!-- ================ AR SCENE ================ -->
+<a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    
+    <!-- CAMERA -->
+    <a-entity camera></a-entity>
 
-  <!-- Container 3D -->
-  <a-entity id="model-container" position="0 0 0" scale="0 0 0"></a-entity>
+    <!-- MARKER 1: ARCA BUDDHA -->
+    <a-marker id="marker-buddha"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Arca%20Buddha.patt">
+        <a-entity id="model-buddha"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Arca%20buddha.glb"
+            scale="0.5 0.5 0.5"
+            rotation="0 0 0"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- MARKERS (10 PRASETEL MAPPING) -->
-  
-  <!-- 1. Prasasti Ciaruteun -->
-  <a-marker id="marker-ciaruteun" type="pattern" url="Prasasti Ciaruteun.patt"></a-marker>
+    <!-- MARKER 2: BOROBUDUR -->
+    <a-marker id="marker-borobudur"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Borobudur.patt">
+        <a-entity id="model-borobudur"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Borobudur.glb"
+            scale="0.4 0.4 0.4"
+            rotation="0 0 0"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- 2. Dolmen -->
-  <a-marker id="marker-dolmen" type="pattern" url="Dolmen.patt"></a-marker>
+    <!-- MARKER 3: DEWA BRAHMA -->
+    <a-marker id="marker-brahma"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Dewa%20Brahma.patt">
+        <a-entity id="model-brahma"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Dewa%20Brahma.glb"
+            scale="0.5 0.5 0.5"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- 3. Arca Buddha -->
-  <a-marker id="marker-buddha" type="pattern" url="Arca Buddha.patt"></a-marker>
+    <!-- MARKER 4: DOLMEN -->
+    <a-marker id="marker-dolmen"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Dolmen.patt">
+        <a-entity id="model-dolmen"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Dolmen.glb"
+            scale="0.4 0.4 0.4"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- 4. Borobudur -->
-  <a-marker id="marker-borobudur" type="pattern" url="Borobudur.patt"></a-marker>
+    <!-- MARKER 5: HOMO ERECTUS -->
+    <a-marker id="marker-erectus"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Homo%20Erectus.patt">
+        <a-entity id="model-erectus"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Homo%20Erectus.glb"
+            scale="0.4 0.4 0.4"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- 5. Kjokkenmoddinger -->
-  <a-marker id="marker-kjokken" type="pattern" url="Kjokkenmoddinger.patt"></a-marker>
+    <!-- MARKER 6: KJOKKENMODDINGER -->
+    <a-marker id="marker-kjokken"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Kjokkenmoddinger.patt">
+        <a-entity id="model-kjokken"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Kjokkenmoddinger.glb"
+            scale="0.4 0.4 0.4"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- 6. Menhir -->
-  <a-marker id="marker-menhir" type="pattern" url="Menhir.patt"></a-marker>
+    <!-- MARKER 7: MEGANTHROPUS -->
+    <a-marker id="marker-megan"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Meganthropus%20Paleojavanicus.patt">
+        <a-entity id="model-megan"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Meganthropus%20Paleojavanicus.glb"
+            scale="0.4 0.4 0.4"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- 7. Prambanan -->
-  <a-marker id="marker-prambanan" type="pattern" url="Prambanan.patt"></a-marker>
+    <!-- MARKER 8: MENHIR -->
+    <a-marker id="marker-menhir"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Menhir.patt">
+        <a-entity id="model-menhir"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Menhir.glb"
+            scale="0.5 0.5 0.5"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- 8. Dewa Brahma -->
-  <a-marker id="marker-brahma" type="pattern" url="Dewa Brahma.patt"></a-marker>
+    <!-- MARKER 9: PRAMBANAN -->
+    <a-marker id="marker-prambanan"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Prambanan.patt">
+        <a-entity id="model-prambanan"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Prambanan.glb"
+            scale="0.5 0.5 0.5"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- 9. Meganthropus -->
-  <a-marker id="marker-megan" type="pattern" url="Meganthropus Paleojavanicus.patt"></a-marker>
+    <!-- MARKER 10: PRASASTI CIARUTEUN -->
+    <a-marker id="marker-ciaruteun"
+        type="pattern"
+        url="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Prasasti%20Ciaruteun.patt">
+        <a-entity id="model-ciaruteun"
+            gltf-model="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Prasasti%20Ciaruteun.glb"
+            scale="0.5 0.5 0.5"
+            visible="false">
+        </a-entity>
+    </a-marker>
 
-  <!-- 10. Homo Erectus -->
-  <a-marker id="marker-erectus" type="pattern" url="Homo Erectus.patt"></a-marker>
-
-  <a-entity camera></a-entity>
 </a-scene>
 
-<script>
-// ======================
-// MAPPING MATERI
-// ======================
-
-const materi = {
-  "marker-ciaruteun": {
-    title: "Prasasti Ciaruteun",
-    text: `Prasasti peninggalan Kerajaan Tarumanegara...`
-  },
-  "marker-dolmen": {
-    title: "Dolmen",
-    text: `Dolmen adalah meja batu besar dari zaman Megalitikum...`
-  },
-  "marker-buddha": {
-    title: "Arca Buddha (Dharmacakra Mudra)",
-    text: `Menggambarkan pemutaran roda Dharma dan ajaran pertama Buddha...`
-  },
-  "marker-borobudur": {
-    title: "Candi Borobudur",
-    text: `Candi Buddha terbesar di dunia, dibangun Dinasti Syailendra...`
-  },
-  "marker-kjokken": {
-    title: "Kjokkenmoddinger",
-    text: `Tumpukan kulit kerang masa Mesolitikum yang menunjukkan pola hidup semi nomaden...`
-  },
-  "marker-menhir": {
-    title: "Menhir",
-    text: `Batu tegak sakral sebagai simbol pemujaan leluhur pada masa Megalitikum...`
-  },
-  "marker-prambanan": {
-    title: "Candi Prambanan",
-    text: `Kompleks candi Hindu terbesar di Indonesia, didedikasikan untuk Trimurti...`
-  },
-  "marker-brahma": {
-    title: "Dewa Brahma",
-    text: `Dewa pencipta dalam ajaran Hindu, bagian dari Trimurti...`
-  },
-  "marker-megan": {
-    title: "Meganthropus Paleojavanicus",
-    text: `Manusia purba tertua di Indonesia dengan rahang besar dan kuat...`
-  },
-  "marker-erectus": {
-    title: "Homo Erectus",
-    text: `Manusia purba yang berjalan tegak dan telah menguasai api...`
-  }
-};
-
-// ======================
-// MAPPING MODEL 3D (.glb)
-// ======================
-
-const models = {
-  "marker-ciaruteun": "Prasasti Ciaruteun.glb",
-  "marker-dolmen": "Dolmen.glb",
-  "marker-buddha": "Arca buddha.glb",
-  "marker-borobudur": "Borobudur.glb",
-  "marker-kjokken": "Kjokkenmoddinger.glb",
-  "marker-menhir": "Menhir.glb",
-  "marker-prambanan": "Prambanan.glb",
-  "marker-brahma": "Dewa Brahma.glb",
-  "marker-megan": "Meganthropus Paleojavanicus.glb",
-  "marker-erectus": "Homo Erectus.glb"
-};
-
-// =============== POPUP HANDLER ===============
-
-let activeMarker = null;
-let popupShown = false;
-
-function showPopup(markerId) {
-  if (popupShown) return;
-  popupShown = true;
-  activeMarker = markerId;
-
-  document.getElementById("popup-title").innerText = materi[markerId].title;
-  document.getElementById("popup-text").innerText = materi[markerId].text;
-
-  document.getElementById("popup").style.display = "flex";
-}
-
-function closePopup() {
-  document.getElementById("popup").style.display = "none";
-  loadModel(activeMarker);
-}
-
-// =============== LOAD MODEL ===============
-
-function loadModel(markerId) {
-  const container = document.getElementById("model-container");
-  container.setAttribute("scale", "1 1 1");
-  container.setAttribute("gltf-model", models[markerId]);
-}
-
-// =============== EVENT MARKERS ===============
-
-function setupMarker(id) {
-  const marker = document.getElementById(id);
-
-  marker.addEventListener("markerFound", () => {
-    popupShown = false;
-    showPopup(id);
-  });
-
-  marker.addEventListener("markerLost", () => {
-    document.getElementById("popup").style.display = "none";
-  });
-}
-
-// REGISTER ALL 10 MARKERS
-Object.keys(materi).forEach(id => setupMarker(id));
-
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
