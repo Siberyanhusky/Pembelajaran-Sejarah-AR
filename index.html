@@ -5,14 +5,18 @@
     <title>Pembelajaran Sejarah AR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- A-FRAME & AR.JS (PATTERN MODE, BUKAN NFT) -->
+    <!-- A-FRAME WAJIB DULU -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+
+    <!-- AR.JS PATTERN (Setelah A-Frame) -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body style="margin:0; overflow:hidden">
 
-    <!-- POPUP MATERI -->
+    <!-- POPUP -->
     <div id="popup" class="popup-hidden">
         <div class="popup-content">
             <h2 id="popup-title"></h2>
@@ -28,59 +32,47 @@
         renderer="logarithmicDepthBuffer: true"
         arjs="sourceType: webcam; debugUIEnabled: false;">
 
-        <!-- =============== SEMUA MARKER & MODEL =============== -->
-
-        <!-- 1. Arca Buddha -->
-        <a-marker id="marker-buddha" type="pattern" url="Arca_Buddha.patt">
-            <a-entity id="model-buddha" gltf-model="Arca_Buddha.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <!-- MARKERS -->
+        <a-marker type="pattern" url="Arca_Buddha.patt">
+            <a-entity gltf-model="Arca_Buddha.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- 2. Borobudur -->
-        <a-marker id="marker-borobudur" type="pattern" url="Borobudur.patt">
-            <a-entity id="model-borobudur" gltf-model="Borobudur.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <a-marker type="pattern" url="Borobudur.patt">
+            <a-entity gltf-model="Borobudur.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- 3. Dewa Brahma -->
-        <a-marker id="marker-brahma" type="pattern" url="Dewa_Brahma.patt">
-            <a-entity id="model-brahma" gltf-model="Dewa_Brahma.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <a-marker type="pattern" url="Dewa_Brahma.patt">
+            <a-entity gltf-model="Dewa_Brahma.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- 4. Dolmen -->
-        <a-marker id="marker-dolmen" type="pattern" url="Dolmen.patt">
-            <a-entity id="model-dolmen" gltf-model="Dolmen.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <a-marker type="pattern" url="Dolmen.patt">
+            <a-entity gltf-model="Dolmen.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- 5. Homo Erectus -->
-        <a-marker id="marker-erectus" type="pattern" url="Homo_Erectus.patt">
-            <a-entity id="model-erectus" gltf-model="Homo_Erectus.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <a-marker type="pattern" url="Homo_Erectus.patt">
+            <a-entity gltf-model="Homo_Erectus.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- 6. Kjokkenmoddinger -->
-        <a-marker id="marker-kjokken" type="pattern" url="Kjokkenmoddinger.patt">
-            <a-entity id="model-kjokken" gltf-model="Kjokkenmoddinger.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <a-marker type="pattern" url="Kjokkenmoddinger.patt">
+            <a-entity gltf-model="Kjokkenmoddinger.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- 7. Meganthropus -->
-        <a-marker id="marker-megan" type="pattern" url="Meganthropus_Paleojavanicus.patt">
-            <a-entity id="model-megan" gltf-model="Meganthropus_Paleojavanicus.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <a-marker type="pattern" url="Meganthropus_Paleojavanicus.patt">
+            <a-entity gltf-model="Meganthropus_Paleojavanicus.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- 8. Menhir -->
-        <a-marker id="marker-menhir" type="pattern" url="Menhir.patt">
-            <a-entity id="model-menhir" gltf-model="Menhir.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <a-marker type="pattern" url="Menhir.patt">
+            <a-entity gltf-model="Menhir.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- 9. Prambanan -->
-        <a-marker id="marker-prambanan" type="pattern" url="Prambanan.patt">
-            <a-entity id="model-prambanan" gltf-model="Prambanan.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <a-marker type="pattern" url="Prambanan.patt">
+            <a-entity gltf-model="Prambanan.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- 10. Prasasti Ciaruteun -->
-        <a-marker id="marker-ciaruteun" type="pattern" url="Prasasti_Ciaruteun.patt">
-            <a-entity id="model-ciaruteun" gltf-model="Prasasti_Ciaruteun.glb" visible="false" scale="0.5 0.5 0.5"></a-entity>
+        <a-marker type="pattern" url="Prasasti_Ciaruteun.patt">
+            <a-entity gltf-model="Prasasti_Ciaruteun.glb" scale="0.5 0.5 0.5"></a-entity>
         </a-marker>
 
-        <!-- Kamera -->
         <a-entity camera></a-entity>
     </a-scene>
 
