@@ -1,24 +1,36 @@
-.popup-hidden { display: none; }
-.popup-show { display: flex; }
-
+/* Default: popup tidak pernah muncul sampai script mengubah class */
 #popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
-    justify-content: center;
+    background: rgba(0,0,0,0.7);
+    display: flex;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Keadaan popup disembunyikan */
+.popup-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Keadaan popup terlihat (saat markerFound) */
+.popup-visible {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .popup-content {
-    max-width: 600px;
     background: white;
-    padding: 20px;
     border-radius: 12px;
-    overflow-y: auto;
-    max-height: 80%;
-    font-family: sans-serif;
+    padding: 20px;
+    max-width: 85%;
+    text-align: center;
 }
