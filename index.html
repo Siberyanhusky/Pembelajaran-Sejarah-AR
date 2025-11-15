@@ -96,12 +96,28 @@
   </a-scene>
 
   <script>
+    // Fungsi untuk meminta izin kamera
+    function requestCameraAccess() {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          alert('Kamera diizinkan!');
+          // Stop stream agar tidak mengakses kamera terus-menerus
+          stream.getTracks().forEach(track => track.stop());
+        })
+        .catch(error => {
+          alert('Gagal mengakses kamera: ' + error.message);
+        });
+    }
+
+    // Panggil fungsi permintaan izin saat halaman dimuat
+    window.onload = function() {
+      requestCameraAccess();
+    };
+
     // Fungsi reset posisi dan rotasi kamera
     document.getElementById('resetCamera').addEventListener('click', function() {
       var sceneEl = document.querySelector('a-scene');
       var cameraEl = sceneEl.cameraEl;
-
-      // Reset posisi dan rotasi ke posisi awal
       cameraEl.setAttribute('position', {x: 0, y: 1.6, z: 0});
       cameraEl.setAttribute('rotation', {x: 0, y: 0, z: 0});
     });
