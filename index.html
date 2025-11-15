@@ -1,40 +1,110 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Model GLB Seragam di Tengah</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <a-assets>
-        <a-asset-item id="model1" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Arca%20buddha.glb"></a-asset-item>
-        <a-asset-item id="model2" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Borobudur.glb"></a-asset-item>
-        <a-asset-item id="model3" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Dewa%20Brahma.glb"></a-asset-item>
-        <a-asset-item id="model4" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Dolmen.glb"></a-asset-item>
-        <a-asset-item id="model5" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Homo%20Erectus.glb"></a-asset-item>
-        <a-asset-item id="model6" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Kjokkenmoddinger.glb"></a-asset-item>
-        <a-asset-item id="model7" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Meganthropus%20Paleojavanicus.glb"></a-asset-item>
-        <a-asset-item id="model8" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Menhir.glb"></a-asset-item>
-        <a-asset-item id="model9" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Prambanan.glb"></a-asset-item>
-        <a-asset-item id="model10" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Prasasti%20Ciaruteun.glb"></a-asset-item>
-      </a-assets>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mari Mengenali Peninggalan Sejarah Di Indonesia</title>
+  <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    h1 {
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      z-index: 1;
+    }
+    #resetCamera {
+      position: absolute;
+      top: 50px;
+      left: 10px;
+      z-index: 2;
+      padding: 10px 20px;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mari Mengenali Peninggalan Sejarah Di Indonesia</h1>
+  <button id="resetCamera">Reset Kamera</button>
+  
+  <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+    
+    <!-- Marker dan Model -->
+    <!-- Pastikan file pattern dan model sudah di upload di folder yang sama -->
+    <!-- 1. Arca Buddha -->
+    <a-marker type='pattern' url='Arca Buddha.patt'>
+      <a-entity gltf-model="Arca Buddha.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- 2. Borobudur -->
+    <a-marker type='pattern' url='Borobudur.patt'>
+      <a-entity gltf-model="Borobudur.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- 3. Dewa Brahma -->
+    <a-marker type='pattern' url='Dewa Brahma.patt'>
+      <a-entity gltf-model="Dewa Brahma.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- 4. Dolmen -->
+    <a-marker type='pattern' url='Dolmen.patt'>
+      <a-entity gltf-model="Dolmen.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- 5. Homo Erectus -->
+    <a-marker type='pattern' url='Homo Erectus.patt'>
+      <a-entity gltf-model="Homo Erectus.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- 6. Kjokkenmoddinger -->
+    <a-marker type='pattern' url='Kjokkenmoddinger.patt'>
+      <a-entity gltf-model="Kjokkenmoddinger.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- 7. Meganthropus Paleojavanicus -->
+    <a-marker type='pattern' url='Meganthropus Paleojavanicus.patt'>
+      <a-entity gltf-model="Meganthropus Paleojavanicus.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- 8. Menhir -->
+    <a-marker type='pattern' url='Menhir.patt'>
+      <a-entity gltf-model="Menhir.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- 9. Prambanan -->
+    <a-marker type='pattern' url='Prambanan.patt'>
+      <a-entity gltf-model="Prambanan.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- 10. Prasasti Ciaruteun -->
+    <a-marker type='pattern' url='Prasasti Ciaruteun.patt'>
+      <a-entity gltf-model="Prasasti Ciaruteun.glb" position="0 0 0" scale="0.5 0.5 0.5"></a-entity>
+    </a-marker>
+    
+    <!-- Kamera -->
+    <a-entity camera></a-entity>
+  </a-scene>
 
-      <!-- Model ditempatkan di tengah dan seragam ukurannya -->
-      <a-entity gltf-model="#model1" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      <a-entity gltf-model="#model2" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      <a-entity gltf-model="#model3" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      <a-entity gltf-model="#model4" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      <a-entity gltf-model="#model5" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      <a-entity gltf-model="#model6" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      <a-entity gltf-model="#model7" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      <a-entity gltf-model="#model8" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      <a-entity gltf-model="#model9" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      <a-entity gltf-model="#model10" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
-      
-      <!-- Kamera dan pencahayaan -->
-      <a-entity camera position="0 1.6 0"></a-entity>
-      <a-light type="ambient" color="#ffffff" intensity="0.6"></a-light>
-      <a-light type="directional" position="1 4 2" intensity="1"></a-light>
-    </a-scene>
-  </body>
+  <script>
+    // Fungsi reset posisi dan rotasi kamera
+    document.getElementById('resetCamera').addEventListener('click', function() {
+      var sceneEl = document.querySelector('a-scene');
+      var cameraEl = sceneEl.cameraEl;
+
+      // Reset posisi dan rotasi
+      cameraEl.setAttribute('position', {x: 0, y: 1.6, z: 0});
+      cameraEl.setAttribute('rotation', {x: 0, y: 0, z: 0});
+    });
+  </script>
+</body>
 </html>
