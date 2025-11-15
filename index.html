@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Model GLB dari GitHub</title>
+    <title>Model GLB Seragam di Tengah</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   </head>
   <body>
@@ -19,17 +19,22 @@
         <a-asset-item id="model10" src="https://raw.githubusercontent.com/Siberyanhusky/Pembelajaran-Sejarah-AR/main/Prasasti%20Ciaruteun.glb"></a-asset-item>
       </a-assets>
 
-      <!-- Posisi model-model ini bisa Anda atur sesuai kebutuhan -->
-      <a-entity gltf-model="#model1" position="-3 0 -5"></a-entity>
-      <a-entity gltf-model="#model2" position="0 0 -5"></a-entity>
-      <a-entity gltf-model="#model3" position="3 0 -5"></a-entity>
-      <a-entity gltf-model="#model4" position="-6 0 -7"></a-entity>
-      <a-entity gltf-model="#model5" position="-3 0 -7"></a-entity>
-      <a-entity gltf-model="#model6" position="0 0 -7"></a-entity>
-      <a-entity gltf-model="#model7" position="3 0 -7"></a-entity>
-      <a-entity gltf-model="#model8" position="6 0 -7"></a-entity>
-      <a-entity gltf-model="#model9" position="-3 0 -9"></a-entity>
-      <a-entity gltf-model="#model10" position="0 0 -9"></a-entity>
+      <!-- Model ditempatkan di tengah dan seragam ukurannya -->
+      <a-entity gltf-model="#model1" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#model2" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#model3" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#model4" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#model5" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#model6" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#model7" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#model8" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#model9" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#model10" position="0 0 -5" scale="0.5 0.5 0.5" rotation="0 0 0"></a-entity>
+      
+      <!-- Kamera dan pencahayaan -->
+      <a-entity camera position="0 1.6 0"></a-entity>
+      <a-light type="ambient" color="#ffffff" intensity="0.6"></a-light>
+      <a-light type="directional" position="1 4 2" intensity="1"></a-light>
     </a-scene>
   </body>
 </html>
